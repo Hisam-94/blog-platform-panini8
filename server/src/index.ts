@@ -119,10 +119,14 @@ app.use(cors(corsOptions));
 const io = new Server(httpServer, {
   cors: {
     origin: allowedOrigins,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
+    methods: ["GET", "POST", "PUT", "DELETE", 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    credentials: true,
+    preflightContinue: false // Important for Vercel
+
   },
 });
+app.options('*', cors(corsOptions));
 
 // Middleware
 app.use(express.json());
