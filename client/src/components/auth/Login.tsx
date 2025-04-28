@@ -10,6 +10,8 @@ const LoginContainer = styled.div`
   max-width: 500px;
   margin: 0 auto;
   padding: ${({ theme }) => theme.space.xl};
+  border-radius: ${({ theme }) => theme.radii.md};
+  border: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const LoginForm = styled.form`
