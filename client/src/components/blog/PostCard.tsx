@@ -10,14 +10,16 @@ interface Author {
 }
 
 interface PostProps {
-  _id: string;
-  title: string;
-  content: string;
-  author: Author;
-  createdAt: string;
-  tags: string[];
-  likes: string[];
-  image?: string;
+  post: {
+    _id: string;
+    title: string;
+    content: string;
+    author: Author;
+    createdAt: string;
+    tags?: string[];
+    likes: string[];
+    image?: string;
+  };
 }
 
 const Card = styled.div`
@@ -43,7 +45,7 @@ const PostImage = styled.div<{ backgroundImage?: string }>`
   background-image: ${({ backgroundImage }) =>
     backgroundImage
       ? `url(${backgroundImage})`
-      : `${({ theme }) => theme.colors.gradient.blue}`};
+      : `${({ theme }:any) => theme.colors.gradient.blue}`};
   background-size: cover;
   background-position: center;
   position: relative;
@@ -183,16 +185,9 @@ const truncateText = (text: string, maxLength: number) => {
   return text.slice(0, maxLength) + "...";
 };
 
-const PostCard: React.FC<PostProps> = ({
-  _id,
-  title,
-  content,
-  author,
-  createdAt,
-  tags,
-  likes,
-  image,
-}) => {
+const PostCard: React.FC<PostProps> = ({ post }) => {
+  const { _id, title, content, author, createdAt, tags, likes, image } = post;
+
   const { user } = useAuth();
   const isLiked = user ? likes.includes(user.id) : false;
 
@@ -200,7 +195,7 @@ const PostCard: React.FC<PostProps> = ({
     <Card>
       <PostImage backgroundImage={image}>
         <TagsContainer>
-          {tags.map((tag, index) => (
+          {tags?.map((tag, index) => (
             <Tag key={index} to={`/?tag=${tag}`}>
               {tag}
             </Tag>

@@ -112,7 +112,7 @@ const Dashboard: React.FC = () => {
       try {
         setLoading(true);
         const response = await getUserPosts(user.id);
-        setPosts(response);
+        setPosts(response as any);
         setError(null);
       } catch (err) {
         console.error("Error fetching user posts:", err);
