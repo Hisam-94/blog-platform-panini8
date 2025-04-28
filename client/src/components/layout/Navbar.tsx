@@ -14,7 +14,7 @@ const NavbarContainer = styled.nav`
   position: sticky;
   top: 0;
   z-index: 1000;
-  margin-bottom: 20rem;
+  // margin-bottom: 20rem;
 `;
 
 const Logo = styled(Link)`
